@@ -20,8 +20,8 @@ class TaskService:
 
     # Create Task by User ID (Owner ID) (User ID is the user who is creating the task)
     @staticmethod
-    def create_task(db: Session, task: TaskCreate, owner_id, user_id: int):
-        db_task = Task(**task.dict(), owner_id = user_id)
+    def create_task(db: Session, task: TaskCreate, user_id: int):
+        db_task = Task(**task.model_dump(), owner_id = user_id)
         db.add(db_task)
         db.commit()
         db.refresh(db_task)
