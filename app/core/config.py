@@ -9,7 +9,7 @@ class Settings(BaseSettings):
 
 
     # Database
-    DATABASE_URL: str = "postgresql://user:password@host:port/taskdb"
+    DATABASE_URL: str = "postgresql://user:password@db:5432/taskdb"
 
 
     # Security
