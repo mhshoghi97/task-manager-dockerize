@@ -8,6 +8,7 @@ from app.database import get_db
 from app.schemas.user import UserCreate, UserResponse, Token
 from app.core.config import settings
 from app.services.auth_service import AuthService
+from typing_extensions import Annotated
 
 # Auth Router for Authentication and Authorization
 router = APIRouter()
@@ -26,7 +27,7 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     return AuthService.create_user(db=db, user=user)
 
 
-@router.get("/login", response_model=Token)
+@router.post("/login", response_model=Token)
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = AuthService.authenticate_user(db, form_data.username, form_data.password)
     if not user:
@@ -39,4 +40,4 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(data={"sub": user.email}, expires_delta=access_token_expires)
 
-    return { "access_token": access_token, "token_type": "bearer"}
+    return { "access_token": "access_token", "token_type": "bearer"}
