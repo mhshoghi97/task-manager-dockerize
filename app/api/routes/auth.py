@@ -13,7 +13,7 @@ from typing_extensions import Annotated
 # Auth Router for Authentication and Authorization
 router = APIRouter()
 
-@router.get("/register", response_model=UserResponse)
+@router.post("/register", response_model=UserResponse)
 def register(user: UserCreate, db: Session = Depends(get_db)):
 
     # Covert user email to string
