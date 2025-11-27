@@ -25,6 +25,10 @@ class TaskUpdate(TaskBase):
     is_completed: Optional[bool] = None
 
 
+
+# Task Response Schema
+# This schema is used to return the task data to the client
+# from_attributes = True is used to convert the SQLAlchemy model to a Pydantic model
 class TaskResponse(TaskBase):
     id: int
     owner_id: int
